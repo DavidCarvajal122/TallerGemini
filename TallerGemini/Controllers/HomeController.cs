@@ -17,8 +17,7 @@ public class HomeController : Controller
     public async Task <IActionResult> Index()
     {
         GeminiRepository repo = new GeminiRepository();
-        string answer = await repo.GetChatResponse("Dame un resumen"); 
-
+        string answer = await repo.GetChatResponse("Dame un resumen de la película Shrek"); 
         return View(answer);
     }
 
