@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TallerGemini.Models;
+using TallerGemini.Repositories;
 
 namespace TallerGemini.Controllers;
 
@@ -13,9 +14,12 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task <IActionResult> Index()
     {
-        return View();
+        GeminiRepository repo = new GeminiRepository();
+        string answer = await repo.GetChatResponse("Dame un resumen"); 
+
+        return View(answer);
     }
 
     public IActionResult Privacy()

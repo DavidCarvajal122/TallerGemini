@@ -7,9 +7,9 @@ namespace TallerGemini.Repositories
     {
         HttpClient _httpClient;
         private string apiKey = "AIzaSyA9Z4NGf8-ic-wvdaQ6xHNLI8ZHZkzxvM4"; 
-        public GeminiRepository(HttpClient httpClient)
+        public GeminiRepository()
         {
-            _httpClient = httpClient;
+            _httpClient = new HttpClient();
         }
         public async Task<string> GetChatResponse(string prompt)
         {
@@ -35,7 +35,7 @@ namespace TallerGemini.Repositories
             };
             message.Content = JsonContent.Create<GeminiRequest>(request);
             var response = await _httpClient.SendAsync(message);
-            string answer = response.Content.ToString();
+            string answer = await response.Content.ReadAsStringAsync();
 
             return answer;
         }
