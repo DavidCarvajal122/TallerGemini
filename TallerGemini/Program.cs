@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IChatBotServices, GeminiRepository>();
+builder.Services.AddSingleton<IChatBotServices, DeepSeekRepository>();
 
 var app = builder.Build();
 
