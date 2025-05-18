@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IChatBotServices, DeepSeekRepository>();
+builder.Services.AddSingleton<IChatBotServices, GroqIARepository>();
 
 var app = builder.Build();
 

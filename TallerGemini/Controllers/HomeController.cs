@@ -20,7 +20,7 @@ public class HomeController : Controller
     public async Task <IActionResult> Index()
     {
         // GeminiRepository repo = new GeminiRepository();
-        OpenIARepository repo = new OpenIARepository();
+        GroqIARepository repo = new GroqIARepository();
         string answer = await _chatBotServices.GetChatResponse("Dame un resumen de la película Shrek"); 
         return View(answer);
     }
