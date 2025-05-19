@@ -1,8 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "ChatBot";
+    var respuesta = ViewBag.Respuesta as string;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>ChatBot Gemini / Groq</h2>
+
+<form method="post" style="margin-bottom: 30px;">
+    <div>
+        <label for="modelo">Selecciona el modelo:</label><br />
+        <select name="modelo" id="modelo" required>
+            <option value="">-- Elige un modelo --</option>
+            <option value="Gemini">Gemini</option>
+            <option value="Groq">Groq</option>
+        </select>
+    </div>
+
+    <br />
+
+    <div>
+        <label for="mensaje">Tu mensaje:</label><br />
+        <input type="text" id="mensaje" name="mensaje" style="width: 400px;" required />
+    </div>
+
+    <br />
+
+    <button type="submit">Enviar</button>
+</form>
+
+@if (!string.IsNullOrEmpty(respuesta))
+{
+    <div style="margin-top: 20px; padding: 15px; background-color: #f5f5f5; border-left: 5px solid #007acc;">
+        <strong>Respuesta del bot:</strong><br />
+        <p>@respuesta</p>
+    </div>
+}

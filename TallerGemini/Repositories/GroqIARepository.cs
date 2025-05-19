@@ -1,11 +1,10 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using TallerGemini.Interfaces;
 
 namespace TallerGemini.Repositories
 {
-    public class GroqIARepository : IChatBotServices
+    public class GroqIARepository
     {
         private readonly HttpClient _httpClient;
         private const string ApiKey = "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";
@@ -17,11 +16,11 @@ namespace TallerGemini.Repositories
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ApiKey);
         }
 
-        public async Task<string> GetChatResponse(string prompt)
+        public async Task<string> GetResponse(string prompt)
         {
             var requestBody = new
             {
-                model = "llama-3.3-70b-versatile",
+                model = "llama3-70b-8192", 
                 messages = new[]
                 {
                     new { role = "user", content = prompt }

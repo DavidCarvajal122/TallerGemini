@@ -2,37 +2,57 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TallerGemini.Interfaces;
 using TallerGemini.Models;
-using TallerGemini.Repositories;
 
-namespace TallerGemini.Controllers;
-
-public class HomeController : Controller
+namespace TallerGemini.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IChatBotServices _chatBotServices;
-
-    public HomeController(ILogger<HomeController> logger, IChatBotServices chatbotServices)
+    public class HomeController : Controller
     {
-        _logger = logger;
-        _chatBotServices = chatbotServices;
-    }
+        private readonly ILogger<HomeController> _logger;
+        private readonly IChatBotServices _chatBotServices;
 
-    public async Task <IActionResult> Index()
-    {
-        // GeminiRepository repo = new GeminiRepository();
-        GroqIARepository repo = new GroqIARepository();
-        string answer = await _chatBotServices.GetChatResponse("Dame un resumen de la película Shrek"); 
-        return View(answer);
-    }
+        public HomeController(ILogger<HomeController> logger, IChatBotServices chatbotServices)
+        {
+            _logger = logger;
+            _chatBotServices = chatbotServices;
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [HttpPost]
+        public async Task<IActionResult> Index(string mensaje, string modelo)
+        {
+            string respuesta;
+
+            if (modelo == "Gemini")
+            {
+                respuesta = await _chatBotServices.GetGeminiResponse(mensaje);
+            }
+            else if (modelo == "Groq")
+            {
+                respuesta = await _chatBotServices.GetGroqResponse(mensaje);
+            }
+            else
+            {
+                respuesta = "Modelo no válido.";
+            }
+
+            ViewBag.Respuesta = respuesta;
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

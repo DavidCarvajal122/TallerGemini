@@ -1,11 +1,14 @@
 using TallerGemini.Interfaces;
 using TallerGemini.Repositories;
+using TallerGemini.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IChatBotServices, GroqIARepository>();
+builder.Services.AddScoped<IChatBotServices, ChatBotServices>();
+
+//builder.Services.AddSingleton<IChatBotServices, GroqIARepository>();
 
 var app = builder.Build();
 

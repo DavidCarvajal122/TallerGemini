@@ -16,7 +16,17 @@ namespace TallerGemini.Repositories
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
         }
 
-        public async Task<string> GetChatResponse(string prompt)
+        public async Task<string> GetGeminiResponse(string prompt)
+        {
+            return await SendChatRequest(prompt);
+        }
+
+        public async Task<string> GetGroqResponse(string prompt)
+        {
+            return await SendChatRequest(prompt);
+        }
+
+        private async Task<string> SendChatRequest(string prompt)
         {
             var url = "https://api.deepseek.com/chat/completions";
 
@@ -61,3 +71,5 @@ namespace TallerGemini.Repositories
         }
     }
 }
+
+
