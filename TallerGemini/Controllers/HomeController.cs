@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using TallerGemini.Data;
 using TallerGemini.Interfaces;
 using TallerGemini.Models;
 
@@ -9,11 +10,14 @@ namespace TallerGemini.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IChatBotServices _chatBotServices;
+        private readonly AppDbContext _context; 
 
-        public HomeController(ILogger<HomeController> logger, IChatBotServices chatbotServices)
+
+        public HomeController(ILogger<HomeController> logger, IChatBotServices chatbotServices, AppDbContext context)
         {
             _logger = logger;
             _chatBotServices = chatbotServices;
+            _context = context;
         }
 
         [HttpGet]
@@ -39,6 +43,17 @@ namespace TallerGemini.Controllers
             {
                 respuesta = "Modelo no válido.";
             }
+            var respuestaChat = new RespuestaChat
+            {
+                Respuesta = respuesta,
+                Fecha = DateTime.Now,
+                Proveedor = modelo,
+                GuardadoPor = User.Identity?.Name ?? "Anónimo"
+            };
+
+            _context.Respuestas.Add(respuestaChat);
+            await _context.SaveChangesAsync();
+
 
             ViewBag.Respuesta = respuesta;
             return View();
