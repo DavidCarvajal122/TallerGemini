@@ -5,6 +5,5 @@
 
         Task<string> GetGeminiResponse(string prompt);
         Task<string> GetGroqResponse(string prompt);
-        //public Task<string> GetChatResponse(string prompt);  
     }
 }
