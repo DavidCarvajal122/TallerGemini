@@ -3,12 +3,60 @@
     var respuesta = ViewBag.Respuesta as string;
 }
 
-<h2>ChatBot Gemini / Groq</h2>
+<h2>Padilla_Carvajal_Navarrete_ArevaloBot Gemini / Groq</h2>
+
+<h2 class="text-center mb-4">Miembros del Grupo</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    <div class="col">
+        <div class="card shadow d-flex flex-row align-items-center p-3">
+            <img src="~/imagenes/integrante1.jpg" class="rounded-circle me-3" alt="Giovanny Padilla" style="width: 100px; height: 100px; object-fit: cover;">
+            <div>
+                <h5 class="card-title mb-1">Giovanny Padilla</h5>
+                <p class="mb-1"><strong>Correo:</strong> giovanny.padilla@udla.edu.ec</p>
+                <p class="mb-0"><strong>Intereses:</strong> Inteligencia Artificial, Backend. Scarlet</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card shadow d-flex flex-row align-items-center p-3">
+            <img src="~/imagenes/integrante2.jpg" class="rounded-circle me-3" alt="David Carvajal" style="width: 100px; height: 100px; object-fit: cover;">
+            <div>
+                <h5 class="card-title mb-1">David Carvajal</h5>
+                <p class="mb-1"><strong>Correo:</strong> david.carvajal@udla.edu.ec</p>
+                <p class="mb-0"><strong>Intereses:</strong> Desarrollo Web, Fotografía</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card shadow d-flex flex-row align-items-center p-3">
+            <img src="~/imagenes/integrante3.jpg" class="rounded-circle me-3" alt="Jeffrey Navarrete" style="width: 100px; height: 100px; object-fit: cover;">
+            <div>
+                <h5 class="card-title mb-1">Jeffrey Navarrete</h5>
+                <p class="mb-1"><strong>Correo:</strong> jeffrey.navarrete@udla.edu.ec</p>
+                <p class="mb-0"><strong>Intereses:</strong> Futbol</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card shadow d-flex flex-row align-items-center p-3">
+            <img src="~/imagenes/integrante4.jpg" class="rounded-circle me-3" alt="Lenin Arevalo" style="width: 100px; height: 100px; object-fit: cover;">
+            <div>
+                <h5 class="card-title mb-1">Lenin Arevalo</h5>
+                <p class="mb-1"><strong>Correo:</strong> lenin.arevalo@udla.edu.ec</p>
+                <p class="mb-0"><strong>Intereses:</strong> Videojuegos</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <form method="post" style="margin-bottom: 30px;">
-    <div>
-        <label for="modelo">Selecciona el modelo:</label><br />
-        <select name="modelo" id="modelo" required>
+    <div class="mb-3">
+        <label for="modelo" class="form-label fw-bold">Selecciona el modelo:</label>
+        <select class="form-select rounded-pill shadow-sm" name="modelo" id="modelo" required style="max-width: 300px;">
             <option value="">-- Elige un modelo --</option>
             <option value="Gemini">Gemini</option>
             <option value="Groq">Groq</option>
@@ -24,7 +72,9 @@
 
     <br />
 
-    <button type="submit">Enviar</button>
+    <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" style="background-color: #007acc; border: none;">
+        🚀 Enviar
+    </button>
 </form>
 
 @if (!string.IsNullOrEmpty(respuesta))
